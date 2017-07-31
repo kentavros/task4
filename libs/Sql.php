@@ -16,7 +16,7 @@ class Sql
 		}
 		else
 		{
-			echo "Do not use * !";
+			return STAR_USED;
 		}
 	 	return $this;
 	}	
@@ -29,7 +29,7 @@ class Sql
 
 	public function exec()
 	{
-		$comm;
+		$comm = '';
 		foreach($this as $value )
 		{
 			$comm .= $value; 
