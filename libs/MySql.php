@@ -23,11 +23,14 @@ class MySql extends Sql
 
 	public function exec()
 	{	
-		parent::exec();
-		$result = mysql_query($this->command, $this->mySqlConnect);
-		$this->result = $result;
-	//insert wile	
-		return $this->result;		
+        parent::exec();
+        $query = mysql_query($this->command, $this->mySqlConnect);
+        $this->result = $query;
+        while ($row =  mysql_fetch_assoc($this->result))
+        {
+            echo $row;
+        }
+        
 	}
 	
 	
