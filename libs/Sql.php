@@ -1,43 +1,51 @@
 <?php
-class Sql
+class SQL
 {
 
 	protected $select;
 	protected $from;
-	protected $command;
 
 
 	public function select($columName)
-	{	
-		if ("*" !== $columName)
-		{
-			$this->select = 'SELECT '.$columName;
+    {
 
-		}
-		else
-		{
-			return STAR_USED;
-		}
-	 	return $this;
-	}	
-	
-	public function from($tableName)
-	{
-		$this->from = ' FROM '.$tableName;
-		return $this; 
-	}
+    }
 
-	public function exec()
-	{
-		$comm = '';
-		foreach($this as $value )
-		{
-			$comm .= $value; 
-		}	
-		
-		$this->command = $comm;
-			
-	} 
+
+//	protected $command;
+//
+//
+//	public function select($columName)
+//	{
+//		if ("*" !== $columName)
+//		{
+//			$this->select = "SELECT ".$columName;
+//
+//		}
+//		else
+//		{
+//			return STAR_USED;
+//		}
+//	 	return $this;
+//	}
+//
+//	public function from($tableName)
+//	{
+//		$this->from = " FROM ".$tableName;
+//		return $this;
+//	}
+//
+//	public function exec()
+//	{
+//		$comm = '';
+//		foreach($this as $value )
+//		{
+//			$comm .= $value;
+//		}
+//
+//		$this->command = $comm;
+//
+//	}
 
 
 

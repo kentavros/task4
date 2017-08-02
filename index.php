@@ -1,12 +1,11 @@
 <?php
     include('libs/config.php');
-    include('libs/Sql.php');
-    include('libs/MySql.php');
-    
-//$db = new Sql();
-//    if ($db = new MySql(HOST, USER_NAME, PASS, DB_NAME))
+    include('libs/function.php');
+
+//$db = new SQL();
+//    if ($db = new MySQL(HOST, USER_NAME, PASS, DB_NAME))
   //  {
-    //    echo "connect to MySql! <br />";
+    //    echo "connect to MySQL! <br />";
    // }
 
 //    $result = mysql_query('SELECT data  FROM MY_TEST');
@@ -15,12 +14,6 @@
 //        echo $row['key']. "<br />";
 //        echo $row['data']. "<br />";
 //    }
-
-echo "<hr>";
-
-
-
-
     //echo $db->select('data')->from('MY_TEST')->exec();
     //v exec - return array data!!!!!!
    // echo $db->select('data')->from('MY_TEST')->exec();
@@ -47,4 +40,7 @@ while($row=mysql_fetch_assoc($query))
 
 
 
+
+
+include('template/tmp.php');
 ?>
