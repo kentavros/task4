@@ -29,18 +29,12 @@
 <div class="container center-block ">
     <div class="starter-template text-center">
 
+        test Exception: <?php if (isset($msg)){ echo  $msg;} else {echo 'no Exception';}?>
+
+
+
+
     </div>
-
-<div>
-
-</div>
-
-
-
-
-
-
-
 <!-- на jQuery (необходим для Bootstrap - х JavaScript плагины) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Включают все скомпилированные плагины (ниже), или включать отдельные файлы по мере необходимости -->
