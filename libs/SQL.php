@@ -3,7 +3,9 @@ class SQL
 {
 
 	protected $select;
-	protected $from;
+    protected $from;
+    protected $insert;
+    protected $values;
 	protected $commandQuery;
 
 
@@ -19,23 +21,42 @@ class SQL
 		return $this;
 	}
 
+    public function insertInto()
+    {
+        $this->insert = "INSERT INTO ".TB_NAME." (`key`, data)";
+        return $this;
+    }
+
+    public function values($key, $data)
+    {
+        $this->values = " VALUES ('".$key."', '".$data."')";
+        return $this;
+    }
+     
+
     public function exec()
     {
-        if (isset($this))
+        if (!empty($this))
         {
             foreach ($this as $value)
             {
-                if (isset($this->select) &&(isset($this->from)))
-                {
-                    $commandQuery = $this->select.$this->from;
-                    $this->commandQuery = $commandQuery;
-                    return $this->commandQuery;
-                }
+                echo $value;
+              //  if (isset($this->select) &&(isset($this->from)))
+               // {
+               //     $this->commandQuery = $this->select . $this->from;
+             //       return $this->commandQuery;
+             //   }
+             //   if (isset($this->insert) && (isset($this->values)))
+             //   {
+              //      $this->commandQuery = $this->insertInto . $this->values;
+               //     return $this->commandQuery;
+               // }
             }
         }
         else
         {
-            return NO_PROPERTIES;
+            echo 'foooo';
+            //return NO_PROPERTIES;
         }
     }
 //	protected $command;

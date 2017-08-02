@@ -24,6 +24,7 @@ class MySQL extends SQL
     public function exec()
     {
         parent::exec();
+        echo "<br>".$this->commandQuery."<br>";
         $result = mysql_query($this->commandQuery, $this->mySqlConnect);
         if (!$result)
         {
@@ -37,9 +38,16 @@ class MySQL extends SQL
                 $arrResult[]=$row;
             }
             return $arrResult;
+            
         }
+        
     }
 
+
+    public function __destruct()
+    {
+        mysql_close($this->mySqlConnect);
+    }
 
 }
 

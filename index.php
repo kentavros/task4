@@ -6,11 +6,11 @@
 //if($conn){
 //    echo "connect!";
 //}
-//$db = mysql_select_db(DB_NAME);
+///$db = mysql_select_db(DB_NAME);
 //if($db){
 //    echo "baza gotova";
 //}
-//
+
 //$query = mysql_query('SELECT data FROM MY_TEST');
 //while($row=mysql_fetch_assoc($query))
 //{
@@ -18,14 +18,25 @@
 //
 //}
 
+//$query =mysql_query("INSERT INTO ".TB_NAME." (`key`, data) VALUES ('user6_6', 'test6_6')");
+//if(!$query)
+//{
+//    echo "ERROR INSERT!!!!!";
+//}
+
 
 try {
     $dbMySQl = new MySQL();
-    $dbMySQl->select('data')->from('MY_TEST');
+    // echo $dbMySQL->insertInto();
+ //   echo $dbMySQL->values('sdfs','dwdw');
+// $dbMySQL->insertInto()->values('user6_5_', 'test6_5')->exec();
+ // echo $dbMySQL->select('dfdf'); 
+    
+   //var_dump($dbMySQl->select('data')->from(TB_NAME)->exec());
   //test
-    echo "<pre>";
-    var_dump($dbMySQl->exec());
-    echo "</pre>";
+  
+   //var_dump($dbMySQl->exec());
+ 
 }
 catch (Exception $e)
 {
@@ -33,9 +44,9 @@ catch (Exception $e)
 }
 
 
-
-
-
+$sql = new SQL();
+//echo $sql->select('eeee')->from('edfeded')->exec();
+echo $sql->exec(); 
 
 include('template/tmp.php');
 ?>
