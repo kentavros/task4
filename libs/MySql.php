@@ -24,22 +24,36 @@ class MySQL extends SQL
     public function exec()
     {
         parent::exec();
-        $result = mysql_query($this->commandQuery, $this->mySqlConnect);
+        $result = mysql_query($this->queryProp, $this->mySqlConnect);
         if (!$result)
         {
             throw new Exception(ERROR_QUERY . mysql_error());
         }
         else
         {
-            $arrResult = array();
-            while($row = mysql_fetch_assoc($result))
+            if (is_bool($result))
             {
-                $arrResult[]=$row;
+                return mysql_affected_rows();
             }
-            return $arrResult;
+            else
+            {
+                $i=0;
+                $arrResult = array();
+                while($row = mysql_fetch_assoc($result))
+                {
+                    $arrResult[$i]=$row;
+                    $i++;
+                }
+                return $arrResult;
+            }
         }
     }
 
+
+    public function __destruct()
+    {
+        mysql_close($this->mySqlConnect);
+    }
 
 }
 

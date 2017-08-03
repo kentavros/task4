@@ -17,6 +17,10 @@ define ('ERROR_DB', 'Wrong data base name! ');
 //Error query
 define('ERROR_QUERY', 'Error query! ');
 
+//The request was successful
+//define('REQ_SUCCESS','The request was successful!');
+
+
 /**
  * for Data Base MySQL
  */

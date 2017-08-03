@@ -2,51 +2,55 @@
     include('libs/config.php');
     include('libs/function.php');
 
-//$conn = mysql_connect(HOST, USER_NAME, PASS);
-//if($conn){
-//    echo "connect!";
-//}
-///$db = mysql_select_db(DB_NAME);
-//if($db){
-//    echo "baza gotova";
-//}
+$objSQL = new SQL();
+//$objSQL->select("data");
+//$objSQL->from(TB_NAME);
+//$objSQL->where('user2');
+//echo $objSQL->exec()."<br />";
+//$objSQL->insertInto()->values('user_6', 'test3');
+//echo $objSQL->exec()."<br />";
+//$objSQL->delete()->from(TB_NAME)->where('user');
+$objSQL->update(TB_NAME)->set('data', 'bla_bla_bla')->where('user2');
+echo $objSQL->exec()."<br/>";
+// MYSQL
+try
+{
+    $objMySQL = new MySQL();
+    $result = $objMySQL->select("data")->from(TB_NAME)->exec();
+    //echo '<pre>';
+    var_dump($result);
+    //echo '</pre>';
+    echo "<br />";
+//test where::
 
-//$query = mysql_query('SELECT data FROM MY_TEST');
-//while($row=mysql_fetch_assoc($query))
-//{
-//    echo $row['data'];
+    $result = $objMySQL->select("data")->from(TB_NAME)->where('user2')->exec();
+    var_dump($result);
+    echo "<br />";
+// test insert
+//    $objMySQL->insertInto()->values('user6', 'test_user6')->exec();
+//test delete
+   //$delet =  $objMySQL->delete()->from(TB_NAME)->where('user10')->exec();
 //
-//}
-
-//$query =mysql_query("INSERT INTO ".TB_NAME." (`key`, data) VALUES ('user6_6', 'test6_6')");
-//if(!$query)
+//if (0 != $delet)
 //{
-//    echo "ERROR INSERT!!!!!";
+//    echo $delet; //удаление было
 //}
+//else
+//{
+//    echo '0000'; //не было
+//}
+//test update
+//     $result =$objMySQL->update(TB_NAME)->set('data', 'work')->where('user6')->exec();
+//     echo "<br />".$result;
 
 
-try {
-    $dbMySQl = new MySQL();
-    // echo $dbMySQL->insertInto();
- //   echo $dbMySQL->values('sdfs','dwdw');
-// $dbMySQL->insertInto()->values('user6_5_', 'test6_5')->exec();
- // echo $dbMySQL->select('dfdf'); 
-    
-   //var_dump($dbMySQl->select('data')->from(TB_NAME)->exec());
-  //test
-  
-   //var_dump($dbMySQl->exec());
- 
-}
-catch (Exception $e)
+
+
+} catch (Exception $e)
 {
     $msg = $e->getMessage();
 }
 
-
-$sql = new SQL();
-//echo $sql->select('eeee')->from('edfeded')->exec();
-echo $sql->exec(); 
 
 include('template/tmp.php');
 ?>
