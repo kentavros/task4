@@ -10,7 +10,8 @@ class SQL
     protected $deleteProp;
     protected $updateProp;
     protected $setProp;
-	protected $queryProp;
+    protected $queryProp;
+    protected $flag;
 
 
 	public function select($columName)
@@ -29,15 +30,32 @@ class SQL
 		return $this;
 	}
 
-	public function where($val){
-        $this->whereProp = " WHERE `key`="."'".$val."'";
-        return $this;
+    public function where($val, $tableName){
+        if ($tableName == PG_TB_NAME)
+        {
+            $this->whereProp = " WHERE key="."'".$val."'";
+            return $this;
+        } else
+        {
+            $this->whereProp = " WHERE `key`="."'".$val."'";
+            return $this;
+        }
     }
 
-    public function insertInto()
+    public function insertInto($tableName)
     {
-        $this->insertProp = "INSERT INTO ".TB_NAME." (`key`, `data`)";
-        return $this;
+        if ($tableName == PG_TB_NAME)
+        {
+            $this->insertProp = "INSERT INTO ".$tableName." (key, data)";
+            $this->flag = 1;
+            return $this;
+        }
+        else
+        {
+            $this->insertProp = "INSERT INTO ".$tableName." (`key`, `data`)"; //PROVERITb NA RABOTE!!!!!!
+            return $this;
+        }
+
     }
 
     public function values($key, $data)
@@ -49,19 +67,29 @@ class SQL
     public function delete()
     {
         $this->deleteProp = "DELETE";
+        $this->flag = 1;
         return $this;
     }
 
     public function update($tableName)
     {
         $this->updateProp = "UPDATE ".$tableName;
+        $this->flag = 1;
         return $this;
     }
 
-    public function set($field, $value)
+    public function set($field, $value, $tableName)
     {
-        $this->setProp = " SET `".$field."`='".$value."'";
-        return $this;
+        if ($tableName == PG_TB_NAME)
+        {
+            $this->setProp = " SET ".$field."='".$value."'";       
+            return $this;
+        } 
+        else
+        {
+            $this->setProp = " SET `".$field."`='".$value."'";
+            return $this;
+        }
     }
 
     public function exec()
@@ -96,6 +124,7 @@ class SQL
             $this->deleteProp = null;
             $this->fromProp = null;
             $this->whereProp = null;
+            
             return $this->queryProp;
         }
         elseif ((!empty($this->updateProp)) && (!empty($this->setProp)) && (!empty($this->whereProp)))

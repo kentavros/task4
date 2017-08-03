@@ -34,4 +34,13 @@ define('DB_NAME', 'user1');
 
 define('TB_NAME', 'MY_TEST');
 
+/**
+ *for Data Base PostgreSQL
+ */
+
+define('PG_CONNECT', "host=localhost dbname=user1 user=user1 password=user1z");
+
+define('PG_TB_NAME', 'PG_TEST');
+
+
 ?>
