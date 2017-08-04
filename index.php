@@ -2,87 +2,48 @@
     include('libs/config.php');
     include('libs/function.php');
 
-$objSQL = new SQL();
-//$objSQL->select("data");
-//$objSQL->from(TB_NAME);
-//$objSQL->where('user2');
-//echo $objSQL->exec()."<br />";
-//$objSQL->insertInto()->values('user_6', 'test3');
-//echo $objSQL->exec()."<br />";
-//$objSQL->delete()->from(TB_NAME)->where('user');
-//$objSQL->update(TB_NAME)->set('data', 'bla_bla_bla')->where('user2');
-//echo $objSQL->exec()."<br/>";
-//echo $objSQL->select("key")->from(PG_TB_NAME)->exec();
-//echo $objSQL->insertInto(PG_TB_NAME)->values('user6', 'u6_test')->exec();
-//echo $objSQL->delete()->from(PG_TB_NAME)->where('user6', PG_TB_NAME)->exec();
-echo $objSQL->update(PG_TB_NAME)->set('key', 'user6_UPDATE', PG_TB_NAME)->where('user6', PG_TB_NAME)->exec();
-echo "<br />";
-
-
-// PGsql
-try
-{
-$objPG = new PostgreSQL();
-//select!!!!
-//echo "<pre>";
-var_dump($objPG->select("key")->from(PG_TB_NAME)->exec());
-//echo "</pre>";
-//$objPG->insertInto(PG_TB_NAME)->values('user6', 'u6_test')->exec();
-//Insert
-//$result = $objPG->delete()->from(PG_TB_NAME)->where('user6', PG_TB_NAME)->exec();
-echo "<br />";
-//UPDATE
-$result=$objPG->update(PG_TB_NAME)->set('key', 'user6_UPDATE', PG_TB_NAME)->where('user6', PG_TB_NAME)->exec();
-echo $result;
-}
-catch (Exception $e)
-{
-    $msg = $e->getMessage();
-}
-
-
-
-
-// MYSQL
+//MYSQL
 try
 {
     $objMySQL = new MySQL();
-//    $result = $objMySQL->select("data")->from(TB_NAME)->exec();
-    //echo '<pre>';
-//    var_dump($result);
-    //echo '</pre>';
-//    echo "<br />";
-//test where::
-
-//    $result = $objMySQL->select("`key`")->from(TB_NAME)->where('user10'...TBNAME)->exec(); //ISPRAVIT' TABLE NAME
-//    var_dump($result);
-//    echo "<br />";
-// test insert
-//    $objMySQL->insertInto(TB_NAME)->values('user6', 'test_user6')->exec(); //PROVERIT NA RABOTE INSERT S ARGUMENTOM
-//test delete
-//  $delet =  $objMySQL->delete()->from(TB_NAME)->where('user6', TBNAME)->exec(); //ISPRAVIT' TABLE NAME
-
-//
-//if (0 != $delet)
-//{
-//    echo $delet; //удаление было
-//}
-//else
-//{
-//    echo '0000'; //не было
-//}
-//test update
-//     $result =$objMySQL->update(TB_NAME)->set('data', 'worki', ....TBNAME.)->where('user6')->exec(); //TBNAME PROVERIT'
-//     echo "<br />".$result;
-
-
-
-
+    //SELECT USER6
+    $selectMySQL = $objMySQL->select("`key`")->from(TB_NAME)->where('user6', TB_NAME)->exec();
+    //INSERT TO MySQL
+    $insertMySQL = $objMySQL->insertInto(TB_NAME)->values('user6', 'test_user6_11')->exec();
+    $selectMySQLInsert = $objMySQL->select("`key`")->from(TB_NAME)->where('user6', TB_NAME)->exec();
+    //UPDATE
+    $updateMySQL =$objMySQL->update(TB_NAME)->set('data', 'Update all user6 data', TB_NAME)
+        ->where('user6', TB_NAME)->exec();
+    $selectMySQLData = $objMySQL->select("data")->from(TB_NAME)->where('user6', TB_NAME)->exec();
+    //DELETE
+    $deletMySQL =  $objMySQL->delete()->from(TB_NAME)->where('user6', TB_NAME)->exec();
+    $selectMySQLDel = $objMySQL->select("`key`")->from(TB_NAME)->where('user6', TB_NAME)->exec();
 } catch (Exception $e)
 {
     $msg = $e->getMessage();
 }
 
 
+// PGsql
+try
+{
+    $objPG = new PostgreSQL();
+//SELECT to PG
+    $selectPG = $objPG->select("key")->from(PG_TB_NAME)->where('user6_PG', PG_TB_NAME)->exec();
+//INSERT to PG
+    $insertPG = $objPG->insertInto(PG_TB_NAME)->values('user6_PG', 'u6_test')->exec();
+    $selectPGInsert = $objPG->select("key")->from(PG_TB_NAME)->where('user6_PG', PG_TB_NAME)->exec();
+//UPDATE to PG
+    $update = $objPG->update(PG_TB_NAME)->set('data', 'user6_UPDATE', PG_TB_NAME)
+        ->where('user6_PG', PG_TB_NAME)->exec();
+    $selectPGData = $objPG->select("data")->from(PG_TB_NAME)->where('user6_PG', PG_TB_NAME)->exec();
+//DELETE
+    $delete = $objPG->delete()->from(PG_TB_NAME)->where('user6_PG', PG_TB_NAME)->exec();
+    $selectPGDel = $objPG->select("key")->from(PG_TB_NAME)->where('user6_PG', PG_TB_NAME)->exec();
+}
+catch (Exception $e)
+{
+    $msg = $e->getMessage();
+}
 include('template/tmp.php');
 ?>

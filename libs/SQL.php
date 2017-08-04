@@ -14,25 +14,44 @@ class SQL
     protected $flag;
 
 
+    /**
+     * Method select
+     * @param $columName
+     * @return $this
+     */
 	public function select($columName)
     {
        if ($columName !== '*')
        {
-           $this->selectProp = "SELECT ".$columName;
+//           $this->selectProp = "SELECT \"".$columName."\""; //for work pg (" for class)
+           $this->selectProp = "SELECT ".$columName; //for work pg (" for class)
            return $this;
        }
 
     }
 
+    /**
+     * From
+     * @param $tableName
+     * @return $this
+     */
     public function from($tableName)
 	{
+//		$this->fromProp = " FROM \"".$tableName."\"";//for work pg(" for class)
 		$this->fromProp = " FROM ".$tableName;
 		return $this;
 	}
 
+    /**
+     * WHERE
+     * @param $val
+     * @param $tableName
+     * @return $this
+     */
     public function where($val, $tableName){
         if ($tableName == PG_TB_NAME)
         {
+//            $this->whereProp = " WHERE \"key\"="."'".$val."'";//for work pg(" for class)
             $this->whereProp = " WHERE key="."'".$val."'";
             return $this;
         } else
@@ -42,10 +61,16 @@ class SQL
         }
     }
 
+    /**
+     * INSERT INTO
+     * @param $tableName
+     * @return $this
+     */
     public function insertInto($tableName)
     {
         if ($tableName == PG_TB_NAME)
         {
+//            $this->insertProp = "INSERT INTO \"".$tableName."\" (\"key\", \"data\")"; //for work pg(" for class)
             $this->insertProp = "INSERT INTO ".$tableName." (key, data)";
             $this->flag = 1;
             return $this;
@@ -58,12 +83,22 @@ class SQL
 
     }
 
+    /**
+     * VALUES
+     * @param $key
+     * @param $data
+     * @return $this
+     */
     public function values($key, $data)
     {
         $this->valuesProp = " VALUES ('".$key."', '".$data."')";
         return $this;
     }
 
+    /**
+     * DELETE
+     * @return $this
+     */
     public function delete()
     {
         $this->deleteProp = "DELETE";
@@ -71,13 +106,26 @@ class SQL
         return $this;
     }
 
+    /**
+     * UPDATE
+     * @param $tableName
+     * @return $this
+     */
     public function update($tableName)
     {
-        $this->updateProp = "UPDATE ".$tableName;
+//        $this->updateProp = "UPDATE \"".$tableName."\""; //PROVERITb NA RABOTE!!!!!!
+        $this->updateProp = "UPDATE ".$tableName; //PROVERITb NA RABOTE!!!!!!
         $this->flag = 1;
         return $this;
     }
 
+    /**
+     * SET
+     * @param $field
+     * @param $value
+     * @param $tableName
+     * @return $this
+     */
     public function set($field, $value, $tableName)
     {
         if ($tableName == PG_TB_NAME)
@@ -92,6 +140,10 @@ class SQL
         }
     }
 
+    /**
+     * exec - create query
+     * @return string
+     */
     public function exec()
     {
 

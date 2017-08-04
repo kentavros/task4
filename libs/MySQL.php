@@ -6,6 +6,11 @@ class MySQL extends SQL
     protected $DBname;
 
 
+    /**
+     * Construct - create connect and select db MySQL
+     * MySQL constructor.
+     * @throws Exception
+     */
     public function __construct()
     {
         $this->mySqlConnect = mysql_connect(HOST, USER_NAME, PASS);
@@ -21,6 +26,12 @@ class MySQL extends SQL
 
     }
 
+    /**
+     *
+     * Given query from SQL class and proces it
+     * @return array|int
+     * @throws Exception
+     */
     public function exec()
     {
         parent::exec();

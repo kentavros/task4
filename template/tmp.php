@@ -22,19 +22,82 @@
 <nav class="navbar navbar-inverse ">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand " href="#">Task 4 SQL->MySQL SQL->PGSQL</a>
+            <a class="navbar-brand " href="#">Task 4 -- SQL->MySQL SQL->PGSQL</a>
         </div>
     </div>
 </nav>
 <div class="container center-block ">
     <div class="starter-template text-center">
+        <?php if (isset($msg)){ echo  $msg;}?>
 
-        test Exception: <?php if (isset($msg)){ echo  $msg;} else {echo 'no Exception';}?>
+        <table class="table container" style="width: 800px">
+            <tr>
+                <th class="text-center alert-info" >MySQL</th>
+            </tr>
+        </table>
+        <table class="table container text-center" style="width: 800px">
+            <tr>
+                <td style="width: 400px">
+                    SELECT MySQL DB:
+                </td>
+                <td><?php if (!empty($selectMySQL)) {foreach ($selectMySQL as $v) {echo $v['key']."<br />"; }} else {echo NO_ROW;} ?></td>
+            </tr>
+            <tr>
+                <td style="width: 400px">
+                    INSERT in MySQL key = user6:
+                </td>
+                <td><?php if (is_array($selectMySQLInsert)) {foreach ($selectMySQLInsert as $v) {echo $v['key']."<br />"; }} ?></td>
+            </tr>
+            <tr>
+                <td>
+                    UPDATE data where key = user6:
+                </td>
+                <td><?php if (is_array($selectMySQLData)) {foreach ($selectMySQLData as $v) {echo $v['data']."<br />"; }} ?></td>
+            </tr>
+            <tr>
+                <td>DELETE all where key = user6</td>
+                <td><?php if (!empty($selectMySQLDel)) {foreach ($selectMySQLDel as $v) {echo $v['key']."<br />"; }} else {echo NO_ROW;} ?></td>
+            </tr>
 
+        </table>
+        <div class="alert-success">
+            -
+        </div>
+        <br />
+        <table class="table container" style="width: 800px">
+            <tr>
+                <th class="text-center alert-info" >PostgreSQL</th>
+            </tr>
+        </table>
+        <table class="table container text-center" style="width: 800px">
+            <tr>
+                <td style="width: 400px">
+                    SELECT PgSQL DB:
+                </td>
+                <td><?php if (!empty($selectPG)) {foreach ($selectPG as $v) {echo $v['key']."<br />"; }} else {echo NO_ROW;} ?></td>
+            </tr>
+            <tr>
+                <td style="width: 400px">
+                    INSERT in PgSQL key = user6_PG:
+                </td>
+                <td><?php if (is_array($selectPGInsert)) {foreach ($selectPGInsert as $v) {echo $v['key']."<br />"; }} ?></td>
+            </tr>
+            <tr>
+                <td>
+                    UPDATE data where key = user6_PG:
+                </td>
+                <td><?php if (is_array($selectPGData)) {foreach ($selectPGData as $v) {echo $v['data']."<br />"; }} ?></td>
+            </tr>
+            <tr>
+                <td>DELETE all where key = user6_PG</td>
+                <td><?php if (!empty($selectPGDel)) {foreach ($selectPGDel as $v) {echo $v['key']."<br />"; }} else {echo NO_ROW;} ?></td>
+            </tr>
 
-
-
+        </table>
     </div>
+</div>
+
+
 <!-- на jQuery (необходим для Bootstrap - х JavaScript плагины) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Включают все скомпилированные плагины (ниже), или включать отдельные файлы по мере необходимости -->

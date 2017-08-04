@@ -3,6 +3,11 @@ class PostgreSQL extends SQL
 {
     protected $connectPgProp;
 
+    /**
+     * Construct create connection to DB PostgreSQL
+     * PostgreSQL constructor.
+     * @throws Exception
+     */
     public function __construct()
     {
         $this->connectPgProp = pg_connect(PG_CONNECT);
@@ -12,11 +17,16 @@ class PostgreSQL extends SQL
             }
     }
 
+    /**
+     * Give query for SQL class - and proces
+     * @return array|int
+     * @throws Exception
+     */
     public function exec()
     {
         parent::exec();
         $result = pg_query($this->queryProp);
-            if (!result)
+            if (!$result)
             {
                 throw new Exception(ERROR_QUERY . pg_last_error()); 
             }
